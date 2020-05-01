@@ -62,5 +62,12 @@ fi
 
 POL_Shortcut "LINE.exe" "$TITLE"
 
+rm -f $HOME/Desktop/LINE.desktop
+rm -f $HOME/Desktop/LINE Uninstall.desktop
+
+rm -rf $HOME/.local/share/applications/wine/Programs/LINE
+
+update-desktop-database ~/.local/share/applications/
+
 POL_SetupWindow_Close
 exit
