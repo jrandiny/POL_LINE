@@ -16,8 +16,39 @@ POL_SetupWindow_Init
 
 POL_SetupWindow_presentation "$TITLE" "LINE Corporation" "https://line.me" "jrandiny" "$PREFIX"
 
+POL_System_SetArch "x86"
+
 POL_Wine_SelectPrefix "$PREFIX"
 POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+Set_OS "win7"
+
+POL_Call POL_Install_msvc90
+POL_Call POL_Install_gecko
+POL_Call POL_Install_corefonts
+POL_Call POL_Install_msxml3
+POL_Call POL_Install_dotnet40
+POL_Call POL_Install_dotnet20
+POL_Call POL_Install_dotnet20sp2
+POL_Call POL_Install_vcrun2008
+
+POL_SetupWindow_InstallMethod "LOCAL, DOWNLOAD"
+
+if [ "$INSTALL_METHOD" == "LOCAL" ]; then
+  cd $HOME
+  POL_SetupWindow_browse "$(eval_gettext "Please select the setup file")" "$TITLE"
+  SETUP_FILE="$APP_ANSWER"
+fi
+  
+if [ "$INSTALL_METHOD" == "DOWNLOAD" ]; then
+  cd "$WINEPREFIX/drive_c"
+  POL_Download "https://desktop.line-scdn.net/win/new/LineInst.exe"
+  SETUP_EXE="LineInst.exe"
+fi
+
+POL_Wine_WaitBefore "$TITLE"
+POL_Wine start "$SETUP_EXE"
+POL_Wine_WaitExit "$TITLE" --allow-kill
 
 POL_SetupWindow_Close
 exit
