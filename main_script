@@ -1,0 +1,23 @@
+#!/bin/bash
+# Date : (2020-05-01)
+# Last revision : (2020-05-01)
+# Wine version used : 5.7
+# Distribution used to test : Ubuntu 20.04
+# Author : jrandiny
+
+[ "$PLAYONLINUX" = "" ] && exit 0
+source "$PLAYONLINUX/lib/sources"
+
+TITLE="LINE Messenger"
+PREFIX="LINEMessenger"
+WORKING_WINE_VERSION="5.7"
+
+POL_SetupWindow_Init
+
+POL_SetupWindow_presentation "$TITLE" "LINE Corporation" "https://line.me" "jrandiny" "$PREFIX"
+
+POL_Wine_SelectPrefix "$PREFIX"
+POL_Wine_PrefixCreate "$WORKING_WINE_VERSION"
+
+POL_SetupWindow_Close
+exit
