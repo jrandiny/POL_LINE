@@ -46,9 +46,19 @@ if [ "$INSTALL_METHOD" == "DOWNLOAD" ]; then
   SETUP_EXE="LineInst.exe"
 fi
 
+POL_SetupWindow_message "Please read before continuing\n\nLINE installer will automatically open the app after installation, please quit the app immediately as soon as that happen" "$TITLE"
+
 POL_Wine_WaitBefore "$TITLE"
 POL_Wine start "$SETUP_EXE"
 POL_Wine_WaitExit "$TITLE" --allow-kill
+
+POL_SetupWindow_menu "There are currently some minor graphical glitch (border arround LINE window on top of every app) when running LINE on normal mode. To overcome this you can enable 'virtual desktop' mode but notification will not be shown outside of the 'virtual desktop'" "$TITLE" "Normal~Virtual Desktop" "~"
+
+if [ "$APP_ANSWER" == "Virtual Desktop" ]; then
+  Set_Desktop "On" "1366" "768"
+fi
+
+POL_Shortcut "LINE.exe" "$TITLE"
 
 POL_SetupWindow_Close
 exit
