@@ -69,5 +69,7 @@ rm -rf $HOME/.local/share/applications/wine/Programs/LINE
 
 update-desktop-database ~/.local/share/applications/
 
+POL_SetupWindow_message "All done!\n\nYou should be able to find LINE on your application list\n\nSuggestion and fixes are welcome\n\nhttps://github.com/jrandiny/POL_LINE"
+
 POL_SetupWindow_Close
 exit
