@@ -38,6 +38,9 @@ if [ "$INSTALL_METHOD" == "LOCAL" ]; then
   cd $HOME
   POL_SetupWindow_browse "$(eval_gettext "Please select the setup file")" "$TITLE"
   SETUP_FILE="$APP_ANSWER"
+  cd "$WINEPREFIX/drive_c"
+  cp "$SETUP_FILE" "LineInst.exe"
+  SETUP_EXE="LineInst.exe"
 fi
   
 if [ "$INSTALL_METHOD" == "DOWNLOAD" ]; then
